@@ -4,7 +4,10 @@
     line-height: 29px;
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow-x: hidden;
     color: #000000;
     max-width: 240px;
     align-self: center;
+    padding: 0px;
+    margin: 0px;
 }

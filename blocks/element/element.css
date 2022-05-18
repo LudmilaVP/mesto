@@ -1,9 +1,22 @@
 .element {
-    padding: 0;
+    list-style-type: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 18px;
-    row-gap: 21px;
-    justify-items: center;
-    list-style: none;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px 17px;
+    padding: 0px;
+    margin: 0px;
 }
+
+@media screen and (max-width: 768px) {
+    .element {
+     grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media screen and (max-width: 400px) {
+    .element {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+    }
+  }
