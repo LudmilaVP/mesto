@@ -1,5 +1,5 @@
 const editButton = document.querySelector('.profile__edit-button');
-const closeIcon = document.querySelector('.popup__close-icon');
+const closeButton = document.querySelector('.popup__close');
 let formElement = document.querySelector('.popup');
 let usernameInput = document.querySelector('.popup__input_type_username');
 let jobInput = document.querySelector('.popup__input_type_job');
@@ -25,5 +25,5 @@ function savePopup(evt) {
 }
 
 editButton.addEventListener('click', openPopup);
-closeIcon.addEventListener('click', closePopup);
+closeButton.addEventListener('click', closePopup);
 form.addEventListener('submit', savePopup);
