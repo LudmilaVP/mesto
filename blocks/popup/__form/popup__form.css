@@ -2,3 +2,10 @@
     padding: 54px 0 48px;
     margin: 0;
 }
+
+@media screen and (max-width: 768px) {
+    .popup__form {
+        max-width: 282px;
+        padding: 75px 0 0;
+    }
+}

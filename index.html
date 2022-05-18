@@ -18,9 +18,9 @@
             <section class="profile">
                 <img class="profile__image" src="./images/profile__image.png" alt="Фото Жак-Ив-Кусто">
                 <div class="profile__info">
-                <h1 class="profile__title">Жак-Ив Кусто</h1>
-                <button type="button" class="profile__edit-button"></button>
-                <p class="profile__description">Исследователь океана</p>
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button type="button" class="profile__edit-button"></button>
+                    <p class="profile__description">Исследователь океана</p>
                 </div>
                 <button type="button" class="profile__add-button"></button>
             </section>
@@ -30,42 +30,42 @@
                         <img class="element__image" src="./images/element__dombay.png" alt="Картинка Домбая">
                         <div class="element__group">
                             <h3 class="element__title">Домбай</h3>
-                            <img class="element__like" src="./images/element__like.png" alt="Значок лайка">
+                            <button class="element__like" type="button"></button>
                         </div>
                     </li>
                     <li class="element__item">
                         <img class="element__image" src="./images/element__elbrus.png" alt="Горы Эльбруса">
                         <div class="element__group">
                             <h3 class="element__title">Эльбрус</h3>
-                            <img class="element__like" src="./images/element__like.png" alt="Значок лайка">
+                            <button class="element__like" type="button"></button>
                         </div>
                     </li>
                     <li class="element__item">
                         <img class="element__image" src="./images/element__karachaevsk.png" alt="Картинка Карачаевска">
                         <div class="element__group">
                             <h3 class="element__title">Карачаевск</h3>
-                            <img class="element__like" src="./images/element__like.png" alt="Значок лайка">
+                            <button class="element__like" type="button"></button>
                         </div>
                     </li>
                     <li class="element__item">
                         <img class="element__image" src="./images/element__karelia.jpg" alt="Природа Карелии">
                         <div class="element__group">
                             <h3 class="element__title">Карелия</h3>
-                            <img class="element__like" src="./images/element__like.png" alt="Значок лайка">
+                            <button class="element__like" type="button"></button>
                         </div>
                     </li>
                     <li class="element__item">
                         <img class="element__image" src="./images/element__konduki.jpg" alt="Песчаные дюны Кондуков">
                         <div class="element__group">
                             <h3 class="element__title">Кондуки</h3>
-                            <img class="element__like" src="./images/element__like.png" alt="Значок лайка">
+                            <button class="element__like" type="button"></button>
                         </div>
                     </li>
                     <li class="element__item">
                         <img class="element__image" src="./images/element__seliger.jpg" alt="Озеро Селигер">
                         <div class="element__group">
                             <h3 class="element__title">Селигер</h3>
-                            <img class="element__like" src="./images/element__like.png" alt="Значок лайка">
+                            <button class="element__like" type="button"></button>
                         </div>
                     </li>
                 </ul>
@@ -76,21 +76,21 @@
             <p class="footer__copyright">&copy;&nbsp2022 Mesto Russia</p>
         </footer>
 
-        <section class="popup popup__opened">
-            <button class="popup__close-icon" type="button"></button>
+        <section class="popup">
+            <button class="popup__close-icon" type="button" aria-label="close"></button>
             <div class="popup__container">
                 <div class="popup__content">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <div class="popup__form">
-                        <input type="text" name="username" value="Жак-Ив Кусто" placeholder="Имя" class="popup__input popup__input_type_name">
-                        <input type="text" name="job" value="Исследователь океана" placeholder="Профессия" class="popup__input popup__input_type_job">
-                    </div>
-                    <button type="submit" class="popup__button" aria-label="close">Сохранить</button>
+                    <form class="popup__form" name="popupForm">
+                        <input type="text" name="username" class="popup__input popup__input_type_username">
+                        <input type="text" name="job" class="popup__input popup__input_type_job">
                 </div>
+                <button type="submit" class="popup__button">Сохранить</button>
+                </form>
             </div>
         </section>
     </div>
-    <script type="text\javascript" src="./scripts/index.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>
