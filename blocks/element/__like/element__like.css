@@ -3,6 +3,7 @@
   width: 22px;
   background-image: url(../../../images/element__like.png);
   background-repeat: no-repeat;
+  background-size: contain;
   cursor: pointer;
   border: none;
 }

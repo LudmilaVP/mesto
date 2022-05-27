@@ -26,48 +26,6 @@
             </section>
             <section class="elements">
                 <ul class="element">
-                    <li class="element__item">
-                        <img class="element__image" src="./images/element__dombay.png" alt="Картинка Домбая">
-                        <div class="element__group">
-                            <h3 class="element__title">Домбай</h3>
-                            <button class="element__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="element__item">
-                        <img class="element__image" src="./images/element__elbrus.png" alt="Горы Эльбруса">
-                        <div class="element__group">
-                            <h3 class="element__title">Эльбрус</h3>
-                            <button class="element__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="element__item">
-                        <img class="element__image" src="./images/element__karachaevsk.png" alt="Картинка Карачаевска">
-                        <div class="element__group">
-                            <h3 class="element__title">Карачаевск</h3>
-                            <button class="element__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="element__item">
-                        <img class="element__image" src="./images/element__karelia.jpg" alt="Природа Карелии">
-                        <div class="element__group">
-                            <h3 class="element__title">Карелия</h3>
-                            <button class="element__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="element__item">
-                        <img class="element__image" src="./images/element__konduki.jpg" alt="Песчаные дюны Кондуков">
-                        <div class="element__group">
-                            <h3 class="element__title">Кондуки</h3>
-                            <button class="element__like" type="button"></button>
-                        </div>
-                    </li>
-                    <li class="element__item">
-                        <img class="element__image" src="./images/element__seliger.jpg" alt="Озеро Селигер">
-                        <div class="element__group">
-                            <h3 class="element__title">Селигер</h3>
-                            <button class="element__like" type="button"></button>
-                        </div>
-                    </li>
                 </ul>
             </section>
         </main>
@@ -90,6 +48,16 @@
             </div>
         </section>
     </div>
+    <template class="element__template">
+            <li class="element__item">
+                <img class="element__image">
+                <div class="element__group">
+                    <h3 class="element__title"></h3>
+                    <button class="element__like" type="button"></button>
+                </div>
+                <button class="element__delete" type="button"></button>
+            </li>
+    </template>
     <script type="text/javascript" src="./scripts/index.js"></script>
 </body>
 
