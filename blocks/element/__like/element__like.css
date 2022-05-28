@@ -1,17 +1,19 @@
 .element__like {
-  height: 19px;
-  width: 22px;
-  background-image: url(../../../images/element__like.png);
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-  border: none;
+    height: 19px;
+    width: 22px;
+    background-image: url(../../../images/element__like.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 
-.element__like:active {
-  background-image: url(../../../images/element__like-active.svg);
+.element__like_active {
+    background-image: url(../../../images/element__like-active.svg);
 }
 
 .element__like:hover {
-  opacity: 0.6;
+    opacity: 0.6;
 }
