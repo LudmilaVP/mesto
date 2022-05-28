@@ -1,0 +1,7 @@
+.element__image_popup {
+    padding: 90px 90px;
+    width: 100px;
+    max-width: 75vw;
+    max-height: 75vh;
+    background-color: rgba(0, 0, 0, 0.9);
+}
