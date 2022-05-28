@@ -1,12 +1,12 @@
 const editButton = document.querySelector('.profile__edit-button');
-const closeButton = document.querySelector('.popup__close');
+const closeButtons = document.querySelectorAll('.popup__close');
 const formElement = document.querySelector('.popup');
 const usernameInput = document.querySelector('.popup__input_type_username');
 const jobInput = document.querySelector('.popup__input_type_job');
 const username = document.querySelector('.profile__title');
 const job = document.querySelector('.profile__description');
 const form = document.querySelector('.popup__form');
-//объявляем переменные для добавления карточек
+
 
 
 function openPopup() {
@@ -15,20 +15,23 @@ function openPopup() {
     jobInput.value = job.textContent;
 }
 
-function closePopup() {
-    formElement.classList.remove('popup_opened');
+function closePopup(event) {
+    event.target.closest('.popup').classList.remove('popup_opened');
 }
 
 function savePopup(evt) {
     evt.preventDefault();
     username.textContent = usernameInput.value;
     job.textContent = jobInput.value;
-    closePopup();
+    closePopup(event);
 }
 
 editButton.addEventListener('click', openPopup);
-closeButton.addEventListener('click', closePopup);
 form.addEventListener('submit', savePopup);
+
+closeButtons.forEach((item) => {
+    item.addEventListener('click', closePopup);
+});
 
 const initialCards = [{
         name: 'Архыз',
