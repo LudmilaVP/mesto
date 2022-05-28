@@ -79,7 +79,7 @@ function renderItem(data) {
     const likeElement = cardElement.querySelector('.element__like');
     likeElement.addEventListener('click', elementLikeActive);
 
-    imageElement.addEventListener('click', imagePopup);
+
 
     return cardElement
 
@@ -93,13 +93,3 @@ function deleteCard(evt) {
 function elementLikeActive(evt) {
     evt.target.classList.toggle('element__like_active');
 };
-
-function imagePopup(evt) {
-    evt.target.classList.add('element__image_popup');
-    evt.target.classList.add('element__title_popup');
-    evt.target.classList.add('popup__close');
-}
-
-function imagePopupRemove() {
-    evt.target.classList.remove('element__image_popup');
-}

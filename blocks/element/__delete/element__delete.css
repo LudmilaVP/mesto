@@ -10,7 +10,6 @@
     position: absolute;
     border: none;
     cursor: pointer;
-    z-index: 9999999;
 }
 
 .element__delete:hover {
