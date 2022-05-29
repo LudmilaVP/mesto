@@ -1,9 +1,0 @@
-.popup__close_image {
-    position: absolute;
-    height: 32px;
-    top: -40px;
-    right: -40px;
-    margin: 0;
-    padding: 0;
-    background: transparent url(../../../../images/close__icon.png) center no-repeat;
-}
