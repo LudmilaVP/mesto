@@ -11,6 +11,10 @@ const ulElement = sectionElements.querySelector('.element');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 const popupImageZoom = document.querySelector('.popup__image-zoom');
+const popupAddElement = document.querySelector('.popup__add-element');
+const titleInput = document.querySelector('.popup__input_type_title');
+const linkInput = document.querySelector('.popup__input_type_link');
+const addButton = document.querySelector('.profile__add-button');
 
 //Общая функция открытия попапов
 function openPopup(popup) {
@@ -114,3 +118,29 @@ function imagePopup(e) {
     popupImage.alt = `${e.target.alt}`;
     popupCaption.textContent = `${e.target.alt}`;
 }
+
+//функция открытия попапа добавления карточки
+function openPopupAddElement(e) {
+    popupAddElement.classList.add('popup_opened');
+    titleInput.value = '';
+    linkInput.value = '';
+}
+
+//функция добавления карточки на страницу
+function createCard(e) {
+    e.preventDefault();
+    let newCard = [];
+    newCard.push({
+        name: `${titleInput.value}`,
+        link: `${linkInput.value}`
+    });
+    initialCards.concat(newCard);
+    initialCards.push({ name: titleInput.value, link: linkInput.value });
+    closePopup(e);
+
+    //ulElement.append(createCard);
+
+}
+
+addButton.addEventListener('click', openPopupAddElement);
+form.addEventListener('submit', createCard);

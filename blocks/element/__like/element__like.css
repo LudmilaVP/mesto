@@ -1,7 +1,7 @@
 .element__like {
-    height: 19px;
-    width: 22px;
-    background-image: url(../../../images/element__like.png);
+    min-height: 19px;
+    min-width: 22px;
+    background: transparent url(../../../images/element__like.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
