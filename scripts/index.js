@@ -14,8 +14,8 @@ const jobInput = document.querySelector('.popup__input_type_job');
 const form = document.querySelector('.popup__form');
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
-const popupImageZoom = document.querySelector('.popup__image-zoom');
-const popupAddElement = document.querySelector('.popup__add-element');
+const popupImageZoom = document.querySelector('.popup_image_zoom');
+const popupAddElement = document.querySelector('.popup_add_element');
 const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 const popupFormAdd = document.querySelector('.popup__form_add');
@@ -82,7 +82,7 @@ function renderList(data) {
 }
 
 function renderItem(data) {
-    const cardTemplate = document.querySelector('.element__template').content;
+    const cardTemplate = document.querySelector('.element-template').content;
     const itemElement = cardTemplate.querySelector('.element__item');
     const cardElement = itemElement.cloneNode(true);
     const imageElement = cardElement.querySelector('.element__image');
@@ -135,8 +135,7 @@ function createElement(e) {
     let name = titleInput.value;
     let link = linkInput.value;
     renderItem({ name, link });
-    const popupAdd = document.querySelector('.popup__add-element')
-    popupAdd.classList.remove("popup_opened")
+    popupAddElement.classList.remove("popup_opened");
 }
 
 addButton.addEventListener('click', openPopupAddElement);
