@@ -142,7 +142,7 @@ function handleEscape(e) {
 
 //закрытие попапа через Esc
 function handleOverlay(e) {
-        //const openedPopup = document.querySelector('.popup_opened');
+        const openedPopup = document.querySelector('.popup_opened');
         if(e.target === openedPopup) {
         closePopup(openedPopup);
     }
