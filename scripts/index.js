@@ -20,9 +20,13 @@ const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 const popupFormAdd = document.querySelector('.popup__form_add');
 
+
+
 //общая функция открытия попапа
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('mousedown', handleOverlay);
 }
 
 function openPopupProfile(e) {
@@ -30,14 +34,16 @@ function openPopupProfile(e) {
     openPopup(popupAvatar);
 }
 
-function addPopupValue(e) {
+function addPopupValue() {
     userNameInput.value = username.textContent;
     jobInput.value = job.textContent;
 }
 
 //общая функция закрытия попапа
-function closePopup(e) {
-    e.target.closest('.popup').classList.remove('popup_opened');
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', handleEscape);
+    document.removeEventListener('mousedown', handleOverlay);
 }
 function handleSavePopup(e) {
     e.preventDefault();
@@ -50,7 +56,8 @@ buttonEdit.addEventListener('click', openPopupProfile);
 formAvatar.addEventListener('submit', handleSavePopup);
 
 buttonsClose.forEach((item) => {
-    item.addEventListener('click', closePopup);
+    item.addEventListener('click', (e) =>
+    e.target.closest('.popup').classList.remove('popup_opened'));
 });
 
 
@@ -106,7 +113,7 @@ function openPopupImage(e) {
 }
 
 //функция открытия попапа добавления карточки
-function openPopupAddElement(e) {
+function openPopupAddElement() {
     openPopup(popupAddElement);
     titleInput.value = '';
     linkInput.value = '';
@@ -123,3 +130,23 @@ function addElement(e) {
 
 buttonAdd.addEventListener('click', openPopupAddElement);
 popupFormAdd.addEventListener('submit', addElement);
+
+
+//закрытие попапа через Esc
+function handleEscape(e) {
+    if(e.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_opened');
+        closePopup(openedPopup);
+    }
+};
+
+//закрытие попапа через Esc
+function handleOverlay(e) {
+        //const openedPopup = document.querySelector('.popup_opened');
+        if(e.target === openedPopup) {
+        closePopup(openedPopup);
+    }
+}
+    
+
+
