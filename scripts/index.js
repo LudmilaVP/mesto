@@ -22,8 +22,8 @@ const popupAddElement = document.querySelector('.popup_add_element');
 const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 const popupFormAdd = document.querySelector('.popup__form_add');
-const formElement = popupMajor.querySelector('.popup__form');
-const inputElement = formElement.querySelector('.popup__input');
+const popupForm = popupMajor.querySelector('.popup__form');
+const inputList = popupForm.querySelectorAll('.popup__input');
 const buttonElement = document.querySelector('.popup__button')
 
 
@@ -38,7 +38,11 @@ function openPopup(popup) {
 function openPopupProfile(e) {
     addPopupValue(e);
     openPopup(popupAvatar);
-    enableValidation(popupAvatar)
+    inputList.forEach((input) => {
+        input.addEventListener('keydown', () => {
+            enableValidation(popupAvatar);
+        })
+    })
 }
 
 function addPopupValue() {
@@ -57,7 +61,7 @@ function handleSavePopup(e) {
     e.preventDefault();
     username.textContent = userNameInput.value;
     job.textContent = jobInput.value;
-    closePopup(e);
+    closePopup(popupAvatar);
 }
 
 buttonEdit.addEventListener('click', openPopupProfile);
@@ -128,7 +132,11 @@ function openPopupAddElement() {
     openPopup(popupAddElement);
     titleInput.value = '';
     linkInput.value = '';
-    enableValidation(popupAddElement)
+    inputList.forEach((input) => {
+        input.addEventListener('keydown', () => {
+            enableValidation(popupAddElement);
+        })
+    })
 }
 
 //функция добавления карточки на страницу
@@ -145,9 +153,9 @@ buttonCloseCard.addEventListener('click', () => {
 
 buttonAdd.addEventListener('click', () => {
     openPopupAddElement();
-    formInput.forEach((input) => {
+    inputList.forEach((input) => {
         input.addEventListener('keydown', () => {
-            enableValidation(popupAddElement);
+            enableValidation(popupAddElement, input);
         })
     })
 });
