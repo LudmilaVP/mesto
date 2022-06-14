@@ -18,23 +18,24 @@ const enableValidation = ({
     // Функция, которая добавляет класс с ошибкой
     const showInputError = (formElement, inputElement, errorMessage) => {
         const errorElement = document.querySelector(`.${inputElement.id}-error`);
-        inputElement.classList.add(inputErrorClass);
+        console.log(document.querySelector(`.${inputElement.id}-error`))
         errorElement.textContent = errorMessage;
+        inputElement.classList.add(inputErrorClass);
         errorElement.classList.add(errorClass);
     };
 
     // Функция, которая удаляет класс с ошибкой
     const hideInputError = (formElement, inputElement) => {
-        const errorElement = formElement.querySelector('.popup__input-error');
+        const errorElement = document.querySelector(`.${inputElement.id}-error`);
+        errorElement.textContent = '';
         inputElement.classList.remove(inputErrorClass);
         errorElement.classList.remove(errorClass);
-        errorElement.textContent = ' ';
     };
 
     // Функция, которая проверяет валидность поля
     const isValid = (formElement, inputElement) => {
         if (!inputElement.validity.valid) {
-            showInputError(formElement, inputElement, inputElement.validationMessage);
+            showInputError(inputElement, inputElement.validationMessage);
         } else {
             hideInputError(formElement, inputElement);
         }
@@ -58,6 +59,7 @@ const enableValidation = ({
             //buttonElement.disabled = true;
         } else {
             buttonElement.classList.remove(inactiveButtonClass);
+            resetForm(inputList, buttonElement);
             //buttonElement.disabled = false;
         }
     };
@@ -74,16 +76,17 @@ const enableValidation = ({
             });
         });
     };
-    const resetForm = () => {
-        const formList = Array.from(document.querySelectorAll(formSelector));
+    const resetForm = (formElement, inputElement, buttonElement) => {
+        hideInputError(formElement, inputElement);
+        buttonElement.classList.add(inactiveButtonClass);
+};
+const formList = Array.from(document.querySelectorAll(formSelector));
         formList.forEach((formElement) => {
             formElement.addEventListener('submit', (e) => {
                 e.preventDefault();
             });
             setEventListeners(formElement);
         });
-    };
-    resetForm();
-};
+}
 
 enableValidation(config);
