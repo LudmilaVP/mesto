@@ -27,11 +27,8 @@ const inputList = popupForm.querySelectorAll('.popup__input');
 const buttonElement = popupForm.querySelector('.popup__button')
 
 
-
 //общая функция открытия попапа
 function openPopup(popup) {
-    //popupForm.reset(popup);
-    //buttonElement.disabled = true;
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handleEscape);
     document.addEventListener('mousedown', handleOverlay);
@@ -40,11 +37,7 @@ function openPopup(popup) {
 function openPopupProfile(e) {
     addPopupValue(e);
     openPopup(popupAvatar);
-    inputList.forEach((input) => {
-        input.addEventListener('keydown', () => {
-            enableValidation(popupAvatar);
-        })
-    })
+    enableValidation(popupAvatar)
 }
 
 function addPopupValue() {
@@ -64,9 +57,18 @@ function handleSavePopup(e) {
     username.textContent = userNameInput.value;
     job.textContent = jobInput.value;
     closePopup(popupAvatar);
+    popupForm.reset(popup);
+    buttonElement.disabled = true;
 }
 
-buttonEdit.addEventListener('click', openPopupProfile);
+buttonEdit.addEventListener('click', () => {
+    openPopupProfile();
+    inputList.forEach((input) => {
+        input.addEventListener('keydown', () => {
+            enableValidation(popupAvatar);
+        })
+    })
+});
 formAvatar.addEventListener('submit', handleSavePopup);
 
 buttonClose.addEventListener('click', () => {
@@ -134,11 +136,6 @@ function openPopupAddElement() {
     openPopup(popupAddElement);
     titleInput.value = '';
     linkInput.value = '';
-    inputList.forEach((input) => {
-        input.addEventListener('keydown', () => {
-            enableValidation(popupAddElement, input);
-        })
-    })
 }
 
 //функция добавления карточки на страницу
@@ -153,7 +150,14 @@ buttonCloseCard.addEventListener('click', () => {
     closePopup(popupAddElement);
 });
 
-buttonAdd.addEventListener('click', openPopupAddElement);
+buttonAdd.addEventListener('click', () => {
+    openPopupAddElement();
+    inputList.forEach((input) => {
+        input.addEventListener('keydown', () => {
+            enableValidation(popupAddElement, input);
+        })
+    })
+});
 popupFormAdd.addEventListener('submit', addElement);
 
 
