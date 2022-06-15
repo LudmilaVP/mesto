@@ -57,7 +57,7 @@ function handleSavePopup(e) {
     username.textContent = userNameInput.value;
     job.textContent = jobInput.value;
     closePopup(popupAvatar);
-    popupForm.reset(popup);
+    popupForm.reset(popupAvatar);
     buttonElement.disabled = true;
 }
 

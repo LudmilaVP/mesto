@@ -42,6 +42,7 @@ const enableValidation = ({
 
     // Функция проверки наличия невалидного поля
     const hasInvalidInput = inputList => {
+        console.log(inputList)
         return inputList.some((inputElement) => {
             return !inputElement.validity.valid;
         })
@@ -60,7 +61,7 @@ const enableValidation = ({
 
     // Функция для всех обработчиков 
     const setEventListeners = (formElement) => {
-        const inputList = Array.from(document.querySelectorAll(inputSelector));
+        const inputList = Array.from(formElement.querySelectorAll(inputSelector));
         const buttonElement = formElement.querySelector(submitButtonSelector);
         toggleButtonState(inputList, buttonElement);
         inputList.forEach((inputElement) => {
