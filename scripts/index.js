@@ -29,6 +29,7 @@ const buttonElement = popupForm.querySelector('.popup__button')
 
 //общая функция открытия попапа
 function openPopup(popup) {
+    //validatePopup(popup);
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handleEscape);
     document.addEventListener('mousedown', handleOverlay);
@@ -57,8 +58,7 @@ function handleSavePopup(e) {
     username.textContent = userNameInput.value;
     job.textContent = jobInput.value;
     closePopup(popupAvatar);
-    popupForm.reset(popup);
-    buttonElement.disabled = true;
+    popupForm.reset(popupAvatar);
 }
 
 buttonEdit.addEventListener('click', () => {
@@ -145,6 +145,7 @@ function addElement(e) {
     let link = linkInput.value;
     renderCard({ name, link });
     closePopup(popupAddElement);
+    popupForm.reset(popupAddElement);
 }
 buttonCloseCard.addEventListener('click', () => {
     closePopup(popupAddElement);
@@ -175,3 +176,4 @@ function handleOverlay(e) {
     if (e.target === openedPopup)
         closePopup(openedPopup);
 }
+
