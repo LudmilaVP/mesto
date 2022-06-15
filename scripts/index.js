@@ -24,12 +24,14 @@ const linkInput = document.querySelector('.popup__input_type_link');
 const popupFormAdd = document.querySelector('.popup__form_add');
 const popupForm = popupMajor.querySelector('.popup__form');
 const inputList = popupForm.querySelectorAll('.popup__input');
-const buttonElement = document.querySelector('.popup__button')
+const buttonElement = popupForm.querySelector('.popup__button')
 
 
 
 //общая функция открытия попапа
 function openPopup(popup) {
+    popupForm.reset(popup);
+    buttonElement.disabled = true;
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handleEscape);
     document.addEventListener('mousedown', handleOverlay);
@@ -134,7 +136,7 @@ function openPopupAddElement() {
     linkInput.value = '';
     inputList.forEach((input) => {
         input.addEventListener('keydown', () => {
-            enableValidation(popupAddElement);
+            enableValidation(popupAddElement, input);
         })
     })
 }
@@ -151,14 +153,7 @@ buttonCloseCard.addEventListener('click', () => {
     closePopup(popupAddElement);
 });
 
-buttonAdd.addEventListener('click', () => {
-    openPopupAddElement();
-    inputList.forEach((input) => {
-        input.addEventListener('keydown', () => {
-            enableValidation(popupAddElement, input);
-        })
-    })
-});
+buttonAdd.addEventListener('click', openPopupAddElement);
 popupFormAdd.addEventListener('submit', addElement);
 
 
