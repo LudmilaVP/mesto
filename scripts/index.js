@@ -30,8 +30,8 @@ const buttonElement = popupForm.querySelector('.popup__button')
 
 //общая функция открытия попапа
 function openPopup(popup) {
-    popupForm.reset(popup);
-    buttonElement.disabled = true;
+    //popupForm.reset(popup);
+    //buttonElement.disabled = true;
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handleEscape);
     document.addEventListener('mousedown', handleOverlay);

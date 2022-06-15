@@ -50,10 +50,10 @@ const enableValidation = ({
     // Функция включения/выключения кнопки
     const toggleButtonState = (inputList, buttonElement) => {
         if (hasInvalidInput(inputList)) {
-            buttonElement.classList.add('popup__button_disabled');
+            buttonElement.classList.add(inactiveButtonClass);
             buttonElement.disabled = true;
         } else {
-            buttonElement.classList.remove('popup__button_disabled');
+            buttonElement.classList.remove(inactiveButtonClass);
             buttonElement.disabled = false;
         }
     };
@@ -65,7 +65,7 @@ const enableValidation = ({
         toggleButtonState(inputList, buttonElement);
         inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
-                isValid(formElement, inputElement)
+                isValid(formElement, inputElement);
                 toggleButtonState(inputList, buttonElement);
             });
         });
