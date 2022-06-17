@@ -9,7 +9,7 @@
     background: #000000;
     border-radius: 2px;
     border-style: none;
-    margin: 48px 0 0;
+    margin: 15px 0 0;
     padding: 0;
 }
 
@@ -25,10 +25,18 @@
     color: #000;
 }
 
+.popup__button_card:disabled {
+    cursor: not-allowed;
+    opacity: 0.2;
+    background: white;
+    border: 1px solid #000;
+    color: #000;
+}
+
 @media screen and (max-width: 768px) {
     .popup__button {
         width: 238px;
-        margin: 15px 0 0;
+        margin: 0;
         font-size: 14px;
         line-height: 17px;
     }

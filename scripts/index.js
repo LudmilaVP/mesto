@@ -24,12 +24,12 @@ const linkInput = document.querySelector('.popup__input_type_link');
 const popupFormAdd = document.querySelector('.popup__form_add');
 const popupForm = popupMajor.querySelector('.popup__form');
 const inputList = popupForm.querySelectorAll('.popup__input');
-const buttonElement = popupForm.querySelector('.popup__button')
+const buttonElement = popupForm.querySelector('.popup__button');
+const buttonElementCard = popupFormAdd.querySelector('.popup__button');
 
 
 //общая функция открытия попапа
 function openPopup(popup) {
-    //validatePopup(popup);
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', handleEscape);
     document.addEventListener('mousedown', handleOverlay);
@@ -38,12 +38,12 @@ function openPopup(popup) {
 function openPopupProfile(e) {
     addPopupValue(e);
     openPopup(popupAvatar);
-    enableValidation(popupAvatar)
 }
 
 function addPopupValue() {
-    userNameInput.value = username.textContent;
-    jobInput.value = job.textContent;
+    userNameInput.value = userNameInput.textContent;
+    jobInput.value = jobInput.textContent;
+    validatePopup([userNameInput, jobInput], formAvatar, buttonElement, formSettings)
 }
 
 //общая функция закрытия попапа
@@ -58,7 +58,6 @@ function handleSavePopup(e) {
     username.textContent = userNameInput.value;
     job.textContent = jobInput.value;
     closePopup(popupAvatar);
-    popupForm.reset(popupAvatar);
 }
 
 buttonEdit.addEventListener('click', () => {
@@ -133,9 +132,11 @@ buttonCloseImage.addEventListener('click', () => {
 
 //функция открытия попапа добавления карточки
 function openPopupAddElement() {
-    openPopup(popupAddElement);
     titleInput.value = '';
     linkInput.value = '';
+    //buttonElementCard.disabled = true;
+    validatePopup([titleInput, linkInput], popupFormAdd, buttonElementCard, formSettings);
+    openPopup(popupAddElement);
 }
 
 //функция добавления карточки на страницу
@@ -145,17 +146,20 @@ function addElement(e) {
     let link = linkInput.value;
     renderCard({ name, link });
     closePopup(popupAddElement);
-    popupForm.reset(popupAddElement);
+
 }
 buttonCloseCard.addEventListener('click', () => {
     closePopup(popupAddElement);
+    titleInput.value = '';
+    linkInput.value = '';
 });
 
 buttonAdd.addEventListener('click', () => {
     openPopupAddElement();
+    buttonElement.disabled = true;
     inputList.forEach((input) => {
         input.addEventListener('keydown', () => {
-            enableValidation(popupAddElement, input);
+            enableValidation(popupAddElement);
         })
     })
 });
@@ -177,3 +181,11 @@ function handleOverlay(e) {
         closePopup(openedPopup);
 }
 
+const config = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_visible'
+};
