@@ -41,8 +41,8 @@ function openPopupProfile(e) {
 }
 
 function addPopupValue() {
-    userNameInput.value = userNameInput.textContent;
-    jobInput.value = jobInput.textContent;
+    userNameInput.value = username.textContent;
+    jobInput.value = job.textContent;
     validatePopup([userNameInput, jobInput], formAvatar, buttonElement, formSettings)
 }
 

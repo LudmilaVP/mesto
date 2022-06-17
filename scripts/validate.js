@@ -20,6 +20,7 @@ const showInputError = (formElement, inputElement, errorMessage, config) => {
     inputElement.classList.add(config.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(config.errorClass);
+    // debugger
 };
 
 // Функция, которая удаляет класс с ошибкой
@@ -61,7 +62,7 @@ const toggleButtonState = (inputList, buttonElement, config) => {
 const setEventListeners = (formElement, config) => {
     const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
     const buttonElement = formElement.querySelector(config.submitButtonSelector);
-    toggleButtonState(inputList, buttonElement, config);
+    //toggleButtonState(inputList, buttonElement, config);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             isValid(formElement, inputElement, config);
