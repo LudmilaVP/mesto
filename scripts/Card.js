@@ -21,9 +21,6 @@ class Card {
             openPopup(popupImageZoom);
             popupImage.src = this._link;
             popupImage.alt = this._name;
-            console.log(this._link)
-            console.log(this._name)
-            console.log(popupImage);
             popupCaption.textContent = this._name;
             buttonCloseImage.addEventListener('click', () => {
                 closePopup(popupImageZoom);
@@ -40,14 +37,12 @@ class Card {
     };
     _setEventListeners() {
         const buttonDeleteElement = this._element.querySelector('.element__delete');
-        buttonDeleteElement.addEventListener('click', () => this._deleteCard());
+        buttonDeleteElement.addEventListener('click', (e) => this._deleteCard(e));
 
         const likeElement = this._element.querySelector('.element__like');
-        likeElement.addEventListener('click', () => this._elementLikeActive());
+        likeElement.addEventListener('click', (e) => this._elementLikeActive(e));
 
-        this._imageElement.addEventListener('click', () =>
-            this._openPopupImage()
-        );
+        this._imageElement.addEventListener('click', () => this._openPopupImage());
     }
     createCard() {
         this._element = this._getTemplate();
@@ -56,7 +51,6 @@ class Card {
         this._imageElement.src = this._link;
         this._imageElement.alt = this._name;
         titleElement.textContent = this._name;
-
         this._setEventListeners();
 
         return this._element

@@ -1,6 +1,15 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
+const formSettings = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_visible'
+};
+
 //переменные profile
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
@@ -24,10 +33,11 @@ const titleInput = document.querySelector('.popup__input_type_title');
 const linkInput = document.querySelector('.popup__input_type_link');
 const popupFormAdd = document.querySelector('.popup__form_add');
 const popupForm = popupMajor.querySelector('.popup__form');
-const inputList = popupForm.querySelectorAll('.popup__input');
+const inputList = document.querySelectorAll('.popup__input');
 const buttonElement = popupForm.querySelector('.popup__button');
 const buttonElementCard = popupFormAdd.querySelector('.popup__button');
-
+const formValidateAvatar = new FormValidator(formSettings, formAvatar);
+const formValidateCard = new FormValidator(formSettings, popupFormAdd);
 
 //общая функция открытия попапа
 function openPopup(popup) {
@@ -45,15 +55,13 @@ function closePopup(popup) {
 // функции попапа редактирования профиля
 function openPopupProfile(e) {
     addPopupValue(e);
+    formValidateAvatar.validatePopup([userNameInput, jobInput], buttonElement);
     openPopup(popupAvatar);
-    enableValidation(formSettings, popupAvatar);
 }
 
 function addPopupValue() {
     userNameInput.value = username.textContent;
     jobInput.value = job.textContent;
-    const formValidateAvatar = new FormValidator(formSettings, formAvatar);
-    formValidateAvatar.validatePopup([userNameInput, jobInput], buttonElement)
 }
 
 function handleSavePopup(e) {
@@ -63,13 +71,9 @@ function handleSavePopup(e) {
     closePopup(popupAvatar);
 }
 
-const enableValidation = (formSettings, popup) => {
-    const formValidator = new FormValidator(formSettings, popup);
-    formValidator.enableValidation();
-}
 
 //функции добавления карточек на страницу
-initialCards.forEach(function(item) {
+initialCards.forEach((item) => {
     renderCard(item.name, item.link);
 });
 
@@ -81,17 +85,15 @@ function renderCard(name, link) {
 //функции попапа добавления карточки
 function openPopupAddElement() {
     popupFormAdd.reset()
-    const formValidateCard = new FormValidator(formSettings, popupFormAdd);
     formValidateCard.validatePopup([titleInput, linkInput], buttonElementCard);
     openPopup(popupAddElement);
-    enableValidation(formSettings, popupAddElement);
 }
 
 function addElement(e) {
     e.preventDefault();
     const name = titleInput.value;
     const link = linkInput.value;
-    renderCard({ name, link });
+    renderCard(name, link);
     closePopup(popupAddElement);
 
 }
@@ -131,13 +133,9 @@ function handleOverlay(e) {
         closePopup(openedPopup);
 }
 
-const formSettings = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_visible'
-};
+
+
+formValidateAvatar.enableValidation();
+formValidateCard.enableValidation();
 
 export { openPopup, closePopup };

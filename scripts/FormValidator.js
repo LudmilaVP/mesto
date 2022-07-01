@@ -1,8 +1,9 @@
-const inputList = document.querySelectorAll('.popup__input');
 class FormValidator {
     constructor(formSettings, formElement) {
         this._formSettings = formSettings;
         this._formElement = formElement;
+        this._inputList = Array.from(formElement.querySelectorAll(formSettings.inputSelector));
+        this._buttonElement = formElement.querySelector(formSettings.submitButtonSelector);
     }
 
     // Функция, которая добавляет класс с ошибкой
@@ -33,8 +34,8 @@ class FormValidator {
     };
 
     // Функция проверки наличия невалидного поля
-    _hasInvalidInput(inputList) {
-        return inputList.some((inputElement) => {
+    _hasInvalidInput() {
+        return this._inputList.some((inputElement) => {
             return !inputElement.validity.valid;
         });
     };
@@ -52,20 +53,20 @@ class FormValidator {
 
     // Функция для всех обработчиков 
     _setEventListeners() {
-        inputList.forEach((inputElement) => {
+        this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._isValid(inputElement);
-                this._toggleButtonState(inputList);
+                this._toggleButtonState(this._inputList);
             });
         });
     };
 
     // Предвалидация
-    validatePopup(inputList, buttonElement) {
-        inputList.forEach(inputElement =>
+    validatePopup() {
+        this._inputList.forEach(inputElement =>
             inputElement.classList.contains(this._inputErrorClass) &&
             hideInputError(this._formElement, inputElement, this._formSettings));
-        this._toggleButtonState(inputList, buttonElement, this._formSettings);
+        this._toggleButtonState(this._inputList, this._buttonElement, this._formSettings);
     };
 
     enableValidation() {
