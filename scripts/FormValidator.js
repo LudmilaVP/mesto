@@ -66,11 +66,10 @@ class FormValidator {
         this._inputList.forEach(inputElement =>
             inputElement.classList.contains(this._inputErrorClass) &&
             hideInputError(this._formElement, inputElement, this._formSettings));
-        this._toggleButtonState(this._inputList, this._buttonElement, this._formSettings);
+        this._toggleButtonState();
     };
 
     enableValidation() {
-        this._formElement.addEventListener('submit', (e) => e.preventDefault());
         this._setEventListeners();
     };
 }
