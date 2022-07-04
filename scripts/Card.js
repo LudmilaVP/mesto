@@ -11,8 +11,8 @@ class Card {
         this._popupImageZoom = document.querySelector('.popup_image_zoom');
     }
     _getTemplate() {
-            const itemContent = document.querySelector('.element-template').content
-            const cardElement = itemContent.cloneNode(true);
+            const itemContent = document.querySelector(this._cardSelector).content
+            const cardElement = itemContent.querySelector('.element__item').cloneNode(true);
             return cardElement
         }
         //функция открытия попапа изображения
@@ -25,8 +25,7 @@ class Card {
 
     //функция удаления карточки
     _deleteCard() {
-        this._element = null;
-        this._element.remove();
+        this._element.remove(); 
     };
 
     //функция активного лайка

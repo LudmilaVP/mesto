@@ -67,13 +67,18 @@ function handleSavePopup(e) {
 }
 
 //функции добавления карточек на страницу
-initialCards.forEach((item) => {
-    renderCard(item.name, item.link);
+initialCards.forEach((item) => { 
+    renderCard(item.name, item.link); 
 });
 
-function renderCard(name, link) {
+function renderCard(name, link) { 
     const newCard = new Card('#template-card', name, link);
-    newCard.createCard();
+    firstCardPrepend(newCard);
+    return newCard
+}
+
+function firstCardPrepend (item) {
+    listElement.prepend(item.createCard()); 
 }
 
 //функции попапа добавления карточки
