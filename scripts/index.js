@@ -67,20 +67,18 @@ function handleSavePopup(e) {
 }
 
 //функции добавления карточек на страницу
-initialCards.forEach((item) => { 
-    renderCard(item.name, item.link); 
+initialCards.forEach((item) => {
+    renderCard(item.name, item.link);
 });
 
-function renderCard(name, link) { 
-    const newCard = new Card('#template-card', name, link);
-    firstCardPrepend(newCard);
-    return newCard
+function renderCard(name, link) {
+    const newCard = createElement(name, link)
+    listElement.prepend(newCard);
 }
 
-function firstCardPrepend (item) {
-    listElement.prepend(item.createCard()); 
+function createElement(name, link) {
+    return new Card('#template-card', name, link).createCard();
 }
-
 //функции попапа добавления карточки
 function openPopupAddElement() {
     popupFormAdd.reset()
