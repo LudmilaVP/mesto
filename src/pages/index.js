@@ -27,10 +27,10 @@ const formValidateCard = new FormValidator(formSettings, popupFormAdd);
 formValidateCard.enableValidation();
 
 // Инициализация класса по добалению данных пользователя
-const userInfo = new UserInfo(
-    '.profile__title',
-    '.profile__description',
-);
+const userInfo = new UserInfo({
+    usernameSelector: '.profile__title',
+    jobSelector: '.profile__description',
+});
 
 // Инициализация создания карточек
 const cardList = new Section({
@@ -43,8 +43,15 @@ const cardList = new Section({
 );
 
 function createElement(name, link) {
-    return new Card('#template-card', name, link).createCard();
+    const card = new Card({
+        cardSelector:'#template-card', 
+        name: name,
+        link: link,
+        handleCardClick: (name, link) => popupImage.open(name, link),
+    });
+    return card.createCard();
 }
+
 //Инициализация попапа профиля
 const popupProfile = new PopupWithForm({ popupAvatar });
 popupProfile.setEventListeners();
