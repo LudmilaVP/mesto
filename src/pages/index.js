@@ -34,13 +34,15 @@ const userInfo = new UserInfo({
 
 // Инициализация создания карточек
 const cardList = new Section({
-        renderer: (item) => {
-            createElement(item);
+    items: initialCards,
+    renderer: (item) => {
+        createElement(item);
             cardList.addItem(createElement(item));
-        },
+    },
     },
     cardsContainer
 );
+cardList.renderItems();
 
 function createElement(name, link) {
     const card = new Card({
