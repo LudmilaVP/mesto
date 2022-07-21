@@ -46,7 +46,7 @@ cardList.renderItems();
 
 function createElement(name, link) {
     const card = new Card({
-        cardSelector:'#template-card', 
+        cardSelector:'.element-template', 
         name: name,
         link: link,
         handleCardClick: (name, link) => popupImage.open(name, link),
