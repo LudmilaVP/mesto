@@ -9,7 +9,6 @@ import {
     formSettings,
     buttonEdit,
     buttonAdd,
-    cardsContainer,
     listElement,
     popupAvatar,
     userNameInput,
@@ -17,7 +16,6 @@ import {
     formAvatar,
     popupAddElement,
     popupFormAdd,
-    popupImageZoom
 } from '../scripts/utils/constans.js';
 
 //Валидация форм
@@ -40,7 +38,7 @@ const cardList = new Section({
             cardList.addItem(createElement(item));
         },
     },
-    cardsContainer
+    listElement
 );
 cardList.renderItems();
 
@@ -55,22 +53,39 @@ function createElement(name, link) {
 }
 
 //Инициализация попапа профиля
-const popupProfile = new PopupWithForm({ popupSelector: '.popup_type_avatar' });
+const popupProfile = new PopupWithForm({ 
+    popupSelector: '.popup_type_avatar',
+    handleFormSubmit: (item) => {
+        item = {
+            name: userNameInput.value,
+            link: jobInput.value
+        };
+    }
+});
 popupProfile.setEventListeners();
 
 //Инициализация попапа добавления карточки
-const popupCard = new PopupWithForm({ popupSelector: '.popup_add_element' });
+const popupCard = new PopupWithForm({ 
+    popupSelector: '.popup_add_element',
+    handleFormSubmit: (item) => {
+        item = {
+            name: userNameInput.value,
+            link: jobInput.value
+        };
+    } });
 popupCard.setEventListeners();
 
 //Инициализация попапа изображения
-const popupImage = new PopupWithImage({ popupSelector: '.popup_image_zoom' });
+const popupImage = new PopupWithImage({ 
+    popupSelector: '.popup_image_zoom'
+});
 popupImage.setEventListeners();
 
 //слушатель попапа редактирования профиля
 buttonEdit.addEventListener('click', () => {
-    userNameInput.value = getUserInfo.name
-    jobInput.value = getUserInfo.about
     const getUserInfo = userInfo.getUserInfo();
+    userNameInput.value = getUserInfo.username
+    jobInput.value = getUserInfo.job
     popupAvatar.open();
     formValidateAvatar.validatePopup();
 });
