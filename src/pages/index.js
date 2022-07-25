@@ -34,11 +34,11 @@ const userInfo = new UserInfo({
 
 // Инициализация создания карточек
 const cardList = new Section({
-    items: initialCards,
-    renderer: (item) => {
-        createElement(item);
+        items: initialCards,
+        renderer: (item) => {
+            createElement(item);
             cardList.addItem(createElement(item));
-    },
+        },
     },
     cardsContainer
 );
@@ -46,7 +46,7 @@ cardList.renderItems();
 
 function createElement(name, link) {
     const card = new Card({
-        cardSelector:'.element-template', 
+        cardSelector: '.element-template',
         name: name,
         link: link,
         handleCardClick: (name, link) => popupImage.open(name, link),
@@ -55,22 +55,22 @@ function createElement(name, link) {
 }
 
 //Инициализация попапа профиля
-const popupProfile = new PopupWithForm({ popupAvatar });
+const popupProfile = new PopupWithForm({ popupSelector: '.popup_type_avatar' });
 popupProfile.setEventListeners();
 
 //Инициализация попапа добавления карточки
-const popupCard = new PopupWithForm({ popupAddElement });
+const popupCard = new PopupWithForm({ popupSelector: '.popup_add_element' });
 popupCard.setEventListeners();
 
 //Инициализация попапа изображения
-const popupImage = new PopupWithImage({ popupImageZoom });
+const popupImage = new PopupWithImage({ popupSelector: '.popup_image_zoom' });
 popupImage.setEventListeners();
 
 //слушатель попапа редактирования профиля
 buttonEdit.addEventListener('click', () => {
-    const getUserInfo = userInfo.getUserInfo();
     userNameInput.value = getUserInfo.name
     jobInput.value = getUserInfo.about
+    const getUserInfo = userInfo.getUserInfo();
     popupAvatar.open();
     formValidateAvatar.validatePopup();
 });
