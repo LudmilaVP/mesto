@@ -4,17 +4,16 @@ import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import Section from '../scripts/components/Section.js';
 import UserInfo from '../scripts/components/UserInfo.js';
-//import "./index.css";
+import "./index.css";
 import {
     formSettings,
     buttonEdit,
     buttonAdd,
     listElement,
-    popupAvatar,
+    initialCards,
     userNameInput,
     jobInput,
     formAvatar,
-    popupAddElement,
     popupFormAdd,
 } from '../scripts/utils/constans.js';
 
