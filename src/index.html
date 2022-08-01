@@ -16,6 +16,7 @@
         <main class="content">
             <section class="profile">
                 <img class="profile__image" src="<%=require('./images/profile__image.png')%>" alt="Фото Жак-Ив-Кусто">
+                <div class="profile__image-overlay"></div>
                 <div class="profile__info">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <button type="button" class="profile__edit-button"></button>
@@ -33,12 +34,12 @@
             <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
         </footer>
 
-        <section class="popup popup_type_avatar">
+        <section class="popup popup_type_profile">
             <div class="popup__container">
                 <button class="popup__close" type="button"></button>
                 <div class="popup__content">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="popup__form popup__form_avatar" name="popupForm" novalidate>
+                    <form class="popup__form popup__form_profile" name="popupForm" novalidate>
                         <input id="username-input" type="text" name="username" placeholder="Имя" class="popup__input popup__input_type_username" minlength="2" maxlength="40" required>
                         <span class="popup__input-error username-input-error"></span>
                         <input id="text-input" type="text" name="job" placeholder="О себе" class="popup__input popup__input_type_job" minlength="2" maxlength="200" required>
@@ -49,9 +50,23 @@
             </div>
         </section>
 
+        <section class="popup popup_type_avatar">
+            <div class="popup__container">
+                <button class="popup__close" type="button"></button>
+                <div class="popup__content">
+                    <h2 class="popup__title">Обновить аватар</h2>
+                    <form class="popup__form popup__form_avatar" name="popupForm" novalidate>
+                        <input id="url-avatar" type="url" placeholder="Ссылка на картинку" name="link" class="popup__input popup__input_type_avatar" required>
+                        <span class="popup__input-error url-input-error"></span>
+                        <button type="submit" class="popup__button">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <section class="popup popup_image_zoom">
             <div class="popup__box">
-                <button class="popup__close popup__close_image" type="button"></button>
+                <button class="popup__close" type="button"></button>
                 <img class="popup__image" src="#" alt="Картинка">
                 <h2 class="popup__caption"></h2>
             </div>
@@ -59,7 +74,7 @@
 
         <section class="popup popup_add_element">
             <div class="popup__container">
-                <button class="popup__close popup__close_card" type="button"></button>
+                <button class="popup__close" type="button"></button>
                 <div class="popup__content">
                     <h2 class="popup__title">Новое место</h2>
                     <form class="popup__form popup__form_add" name="popupForm" novalidate>
@@ -72,6 +87,17 @@
                 </div>
             </div>
         </section>
+
+        <section class="popup popup_delete_card">
+            <div class="popup__container">
+                <button class="popup__close" type="button"></button>
+                <div class="popup__content">
+                    <h2 class="popup__title">Вы уверены?</h2>
+                     <button type="submit" class="popup__button">Да</button>
+                </div>
+            </div>
+        </section>
+
     </div>
     <template id="template-card" class="element-template">
             <li class="element__item">
@@ -79,6 +105,7 @@
                 <div class="element__group">
                     <h3 class="element__title"></h3>
                     <button class="element__like" type="button"></button>
+                    <p class="element__like-counter"></p>
                 </div>
                 <button class="element__delete" type="button"></button>
             </li>

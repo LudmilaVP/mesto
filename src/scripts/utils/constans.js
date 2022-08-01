@@ -44,5 +44,6 @@ export const buttonAdd = document.querySelector('.profile__add-button');
 export const listElement = document.querySelector('.element');
 export const userNameInput = document.querySelector('.popup__input_type_username');
 export const jobInput = document.querySelector('.popup__input_type_job');
-export const formAvatar = document.querySelector('.popup__form_avatar');
+export const formProfile = document.querySelector('.popup__form_profile');
 export const popupFormAdd = document.querySelector('.popup__form_add');
+export const formAvatar = document.querySelector('.popup__form_avatar')
