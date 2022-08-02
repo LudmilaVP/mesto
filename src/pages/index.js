@@ -1,6 +1,7 @@
 import Api from '../scripts/components/Api.js'
 import Card from '../scripts/components/Card.js';
 import FormValidator from '../scripts/components/FormValidator.js';
+import PopupWithConfirmation from '../scripts/components/PopupWithConfirmation.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import Section from '../scripts/components/Section.js';
@@ -10,8 +11,8 @@ import {
     formSettings,
     buttonEdit,
     buttonAdd,
+    buttonEditAvatar,
     listElement,
-    initialCards,
     userNameInput,
     jobInput,
     formProfile,
@@ -33,10 +34,22 @@ const api = new Api({
     token: "b18ec7fb-817a-4a5f-9b54-853093aa3e48",
   });
 
+  // Загрузка с сервера информации о пользователе
+let userId 
+Promise.all([api.getUserProfile(), api.getInitialCards()])
+.then(([initialCards, userData]) => {
+    userInfo.setUserInfo(userData);
+    userId = userData._id;
+    cardList.renderItems(initialCards);
+  })
+  .catch((err) => {
+    console.log(`Ошибка: ${err}`);
+  });
 // Инициализация класса по добалению данных пользователя
 const userInfo = new UserInfo({
     usernameSelector: '.profile__title',
     jobSelector: '.profile__description',
+    avatarSelector: '.profile__image'
 });
 const createElement = (item) => {
         return new Card('.element-template', item, (data) => {
@@ -55,21 +68,59 @@ const cardList = new Section({
 );
 cardList.renderItems();
 
+// Инициализация попапа удаления карточки
+const popupDeleteCard = new PopupWithConfirmation({
+    popupSelector: '.popup_delete_card',
+  });
+  popupDeleteCard.setEventListeners();
+
 //Инициализация попапа профиля
 const popupProfile = new PopupWithForm({
     popupSelector: '.popup_type_profile',
-    handleFormSubmit: (item) => {
-        userInfo.setUserInfo(item);
-    }
+    handleFormSubmit: (data) => {
+         popupProfile.setUserUX(true);
+
+    api.setUserProfile(data)
+      .then((dataInfo) => {
+        userInfo.setUserInfo(dataInfo);
+        popupProfile.close();
+      })
+      .catch((error) => console.log(error))
+      .finally(() => popupProfile.setUserUX(false));
+  },
 });
 popupProfile.setEventListeners();
+
+//Инициализация попапа аватара
+const popupAvatar = new PopupWithForm({
+    popupSelector: '.popup_type_avatar',
+    handleFormSubmit: (data) => {
+        popupAvatar.setUserUX(true);
+
+    api.updateUserAvatar(data)
+      .then((objectInfo) => {
+        userInfo.setUserInfo(objectInfo);
+        popupAvatar.close();
+      })
+      .catch((error) => console.log(error))
+      .finally(() => popupAvatar.setUserUX(false));
+  },
+});
+popupAvatar.setEventListeners();
 
 //Инициализация попапа добавления карточки
 const popupCard = new PopupWithForm({
     popupSelector: '.popup_add_element',
     handleFormSubmit: (item) => {
-        createElement(item);
-        cardList.addItem(createElement(item));
+        popupCard.setUserUX(true);
+        
+    api.addNewCard(item)
+      .then((itemCard) => {
+        cardList.addItem(createElement(itemCard));
+        popupCard.close();
+      })
+      .catch((error) => console.log(error))
+      .finally(() => popupMesto.setUserUX(false));
     }
 });
 
@@ -95,3 +146,9 @@ buttonAdd.addEventListener('click', () => {
     popupCard.open();
     formValidateCard.validatePopup();
 });
+
+// слушатель для попапа аватара
+buttonEditAvatar.addEventListener("click", () => {
+    popupAvatar.open();
+    formValidateAvatar.validatePopup();
+  });
