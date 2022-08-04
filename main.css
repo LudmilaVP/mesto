@@ -14,7 +14,7 @@
 .elements{max-width:100%;min-height:47vh;padding:0 0 66px}@media screen and (max-width:400px){.elements{padding:0 0 48px}}
 .element{display:grid;gap:20px 17px;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(auto,1fr);list-style-type:none;margin:0;padding:0}@media screen and (max-width:768px){.element{grid-template-columns:repeat(2,1fr)}}@media screen and (max-width:400px){.element{gap:20px;grid-template-columns:repeat(1,1fr)}}
 .element__delete{background-color:transparent;background-image:url(ce3b64935accf9b8212e.svg);background-repeat:no-repeat;background-size:contain;border:none;cursor:pointer;display:none;height:19px;position:absolute;right:20px;top:20px;width:18px}.element__delete:hover{opacity:.6}.element__delete_active{display:none}
-.element__group{display:flex;justify-content:space-between;margin:25px 15px 31px 21px;overflow:hidden;padding:0}
+.element__group{align-items:center;display:flex;justify-content:space-between;margin:25px 15px 31px 21px;padding:0;width:240px}
 .element__image{border-radius:10px 10px 0 0;box-sizing:border-box;height:282px;-o-object-fit:cover;object-fit:cover;width:100%}
 .element__item{background-color:#fff;border-radius:10px;display:grid;position:relative;width:100%}
 .element__like{background:transparent url(0980e8d50f0cd170e10d.png);background-position:50%;background-repeat:no-repeat;background-size:contain;border:none;cursor:pointer;margin:0;min-height:19px;min-width:22px;padding:0}.element__like:hover{opacity:.6}
@@ -38,4 +38,5 @@
 .popup__input-error{color:red;display:block;font-size:12px;font-weight:400;line-height:15px;margin:5px 0 0;min-height:34px;opacity:0;padding:0;visibility:hidden}
 .popup__button_disabled{background:#fff;border:1px solid #000;color:#000;cursor:not-allowed;opacity:.2}
 .popup__input-error_visible{opacity:1;visibility:visible}
+.element__group-like{align-items:center;display:flex;flex-direction:column;justify-content:center;margin-bottom:22px;margin-right:20px;width:30px}
 
