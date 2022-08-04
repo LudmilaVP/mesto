@@ -1,21 +1,25 @@
 export default class Card {
-    constructor(cardSelector, data, handleCardClick, handleCardDelete, handleCardLike, userId) {
+    constructor({cardSelector, data, userId, handleCardClick, handleCardDelete, handleLikeClick, handleLikeDelete}) {
         this._cardSelector = cardSelector;
         this._data = data;
         this._name = data.name;
         this._link = data.link;
         this._likes = data.likes;
-        this._id = data._id;
-        this._owner = data.owner;
-        this._userId = userId;
+        this._myId = userId._id;
+        this._ownerId = data.owner._id;
         this._handleCardClick = handleCardClick;
-        this._handleCardLike = handleCardLike;
         this._handleCardDelete = handleCardDelete;
+        this._handleLikeClick = handleLikeClick;
+        this._handleLikeDelete = handleLikeDelete;
     }
     _getTemplate() {
         const itemContent = document.querySelector(this._cardSelector).content
         const cardElement = itemContent.querySelector('.element__item').cloneNode(true);
         return cardElement
+    }
+
+    getCurrentCard() {
+      return this._data;
     }
 
     //функция удаления карточки
@@ -25,45 +29,53 @@ export default class Card {
     };
 
     //функция активного лайка
-    handleLikeActive(likes) { 
-        this._likes = likes;
-        this._likeElement.classList.toggle('element__like_active');
-        this._element.querySelector('.element__like-counter').textContent =
-        this._likes.length;
+    handleLike(data) { 
+      this._likes = data.likes;
+      this._element.querySelector('.element__like_counter').textContent = data.likes.length;
+      if (this._checkMyLike()) {
+        this._element.querySelector('.element__like').classList.add('element__like_active');
+      } else {
+        this._element.querySelector('.element__like').classList.remove('element__like_active');
+      }
       }
 
+      _checkMyLike() {
+        return Boolean(this._likes.find((data) => data._id == this._myId));
+      }
+      _renderButtons() {
+        const buttonDelete = this._element.querySelector('.element__delete');
+        if (this._ownerId === this._myId)
+        buttonDelete.classList.add('element__delete_active');
+        if (this._checkMyLike()) {
+          this._element.querySelector('.element__like').classList.add('element__like_active');
+        }
+      }
     _setEventListeners() {
-        const buttonDeleteElement = this._element.querySelector('.element__delete');
-        const likeElement = this._element.querySelector('.element__like');
-        likeElement.addEventListener('click', () => {
-            this._handleCardLike(this);
-        });
-        if (this._owner._id === this._userId) {
-            buttonDeleteElement.addEventListener('click', () => {
-              this._handleCardDelete(this);
-            });
-          } else {
-            buttonDeleteElement.remove();
-          }
-          buttonDeleteElement.addEventListener('click', () => {
-            this._handleCardDelete(this);
-          });
-          this._imageElement.addEventListener('click', () => {
-            this._handleCardClick(this._data);
-          });
+      this._element.querySelector('.element__image').addEventListener("click", () =>  this._handleCardClick(this._data));
+
+      this._element.querySelector('.element__delete').addEventListener("click", () => this._handleCardDelete(this._data._myId));
+
+      this._element.querySelector('.element__like').addEventListener("click", () => {
+        if (this._checkMyLike()) {
+          this._handleLikeClick();
+        } else {
+          this._handleLikeDelete();
+        }
+      });
+           
     }
     createCard() {
         this._element = this._getTemplate();
         this._imageElement = this._element.querySelector('.element__image');
         const titleElement = this._element.querySelector('.element__title');
+        const likeCounter = this._element.querySelector('.element__like_counter');
         this._imageElement.src = this._link;
         this._imageElement.alt = this._name;
         titleElement.textContent = this._name;
-    if (this._likes.some((item) => { return this._userId === item._id; })) {
-        handleLikeActive(likes);
-    }
+        likeCounter.textContent = this._likes.length;
+        this._renderButtons();
         this._setEventListeners();
 
-        return this._element
+        return this._element;
     };
 }

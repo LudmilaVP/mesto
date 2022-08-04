@@ -38,9 +38,9 @@ const api = new Api({
 let userId 
 Promise.all([api.getUserProfile(), api.getInitialCards()])
 .then(([initialCards, userData]) => {
-    userInfo.setUserInfo(userData);
-    userId = userData._id;
-    cardList.renderItems(initialCards);
+    userInfo.setUserInfo(initialCards);
+    userId = initialCards;
+    cardList.renderItems(userData);
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
@@ -51,14 +51,44 @@ const userInfo = new UserInfo({
     jobSelector: '.profile__description',
     avatarSelector: '.profile__image'
 });
-const createElement = (item) => {
-        return new Card('.element-template', item, (data) => {
-            popupImage.open(data);
-        }).createCard();
+const createElement = (data) => {
+        const card = new Card({
+          cardSelector:'.element-template', 
+          data: data,
+          userId: userId,
+          handleCardClick: (data) => popupImage.open(data),
+          handleCardDelete: (item) => {
+            popupDeleteCard.setSubmit(() => {
+              api.deleteCard(item)
+                .then(() => {
+                  card.deleteCard();
+                  popupDeleteCard.close();
+                })
+                .catch(() => {
+                  console.log('Ошибка удаления');
+                });
+            });
+            popupDeleteCard.open();
+          },
+          handleLikeClick: () => {
+            api.addLikeCard(card.getCurrentCard()._id)
+              .then((item) => {
+                card.handleLike(item);
+              })
+              .catch(() => console.log('Ошибка постановки лайка'));
+          },
+          handleLikeDelete: () => {
+            api.deleteLikeCard(card.getCurrentCard()._id)
+              .then((item) => {
+                card.handleLike(item);
+              })
+              .catch(() => console.log('Ошибка снятия лайка'));
+          },
+        })
+        return card.createCard();
     }
     // Инициализация создания карточек
 const cardList = new Section({
-        items: initialCards,
         renderer: (item) => {
             createElement(item);
             cardList.addItem(createElement(item));
@@ -66,7 +96,6 @@ const cardList = new Section({
     },
     listElement
 );
-cardList.renderItems();
 
 // Инициализация попапа удаления карточки
 const popupDeleteCard = new PopupWithConfirmation({
@@ -81,8 +110,8 @@ const popupProfile = new PopupWithForm({
          popupProfile.setUserUX(true);
 
     api.setUserProfile(data)
-      .then((dataInfo) => {
-        userInfo.setUserInfo(dataInfo);
+      .then((dataItem) => {
+        userInfo.setUserInfo(dataItem);
         popupProfile.close();
       })
       .catch((error) => console.log(error))
@@ -98,8 +127,8 @@ const popupAvatar = new PopupWithForm({
         popupAvatar.setUserUX(true);
 
     api.updateUserAvatar(data)
-      .then((objectInfo) => {
-        userInfo.setUserInfo(objectInfo);
+      .then((object) => {
+        userInfo.setUserInfo(object);
         popupAvatar.close();
       })
       .catch((error) => console.log(error))
@@ -120,7 +149,7 @@ const popupCard = new PopupWithForm({
         popupCard.close();
       })
       .catch((error) => console.log(error))
-      .finally(() => popupMesto.setUserUX(false));
+      .finally(() => popupCard.setUserUX(false));
     }
 });
 

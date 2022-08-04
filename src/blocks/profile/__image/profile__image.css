@@ -5,6 +5,7 @@
     background-position: center;
     width: 120px;
     height: 120px;
+    display: block;
 }
 
 @media screen and (max-width: 900px) {

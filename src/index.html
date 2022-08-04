@@ -15,8 +15,10 @@
         </header>
         <main class="content">
             <section class="profile">
+                <div class="profile__image-container">
                 <img class="profile__image" src="<%=require('./images/profile__image.png')%>" alt="Фото Жак-Ив-Кусто">
-                <div class="profile__image-overlay"></div>
+                <button class="profile__image-overlay" type="button"></button>
+                </div>
                 <div class="profile__info">
                     <h1 class="profile__title">Жак-Ив Кусто</h1>
                     <button type="button" class="profile__edit-button"></button>
@@ -104,8 +106,10 @@
                 <img class="element__image">
                 <div class="element__group">
                     <h3 class="element__title"></h3>
+                    <div class="element__group-like">
                     <button class="element__like" type="button"></button>
-                    <p class="element__like-counter"></p>
+                    <p class="element__like_counter"></p>
+                </div>
                 </div>
                 <button class="element__delete" type="button"></button>
             </li>

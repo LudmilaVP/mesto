@@ -1,0 +1,16 @@
+.profile__image-overlay {
+    background-image: hsla(0, 0%, 0%, 0.80) url("../../../images/profile__edit-button.png");
+    opacity: 0;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 120px;
+    height: 120px;
+    top: 0;
+    left: 0;
+    border: none;
+    border-radius: 50%;
+}
+.profile__image-overlay:hover {
+    opacity: .6;
+  }

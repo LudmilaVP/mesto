@@ -10,6 +10,7 @@
     position: absolute;
     border: none;
     cursor: pointer;
+    display: none;
 }
 
 .element__delete:hover {

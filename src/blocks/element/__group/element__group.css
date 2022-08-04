@@ -1,7 +1,7 @@
 .element__group {
     display: flex;
     justify-content: space-between;
-    padding: 0;
-    margin: 25px 15px 31px 21px;
-    overflow: hidden;
+    align-items: center;
+    margin: 25px 20px 22px 21px;
+    width: 246px;
 }
