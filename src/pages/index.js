@@ -30,8 +30,8 @@ formValidateAvatar.enableValidation();
 
 // Инициализация класса API
 const api = new Api({
-    address: "https://mesto.nomoreparties.co/v1/cohort-46",
-    token: "b18ec7fb-817a-4a5f-9b54-853093aa3e48",
+    address: "https://mesto.nomoreparties.co/v1/cohort-50",
+    token: "6d230dea-9c95-40e9-94e3-e33b18a30e51",
   });
 
   // Загрузка с сервера информации о пользователе
