@@ -38,9 +38,9 @@ const api = new Api({
 let userId 
 Promise.all([api.getUserProfile(), api.getInitialCards()])
 .then(([initialCards, userData]) => {
-    userInfo.setUserInfo(initialCards);
-    userId = initialCards;
-    cardList.renderItems(userData);
+  userId = initialCards;
+  userInfo.setUserInfo(initialCards);
+  cardList.renderItems(userData);
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
@@ -177,7 +177,7 @@ buttonAdd.addEventListener('click', () => {
 });
 
 // слушатель для попапа аватара
-buttonEditAvatar.addEventListener("click", () => {
+buttonEditAvatar.addEventListener('click', () => {
     popupAvatar.open();
     formValidateAvatar.validatePopup();
   });
