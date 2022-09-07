@@ -42,3 +42,4 @@
 @import url(../blocks/popup/__input/_error/_visible/popup__input-error_visible.css);
 @import url(../blocks/element/__group-like/element__group-like.css);
 @import url(../blocks/element/__like/element__like_counter.css);
+@import url(../blocks/element/__delete/_active/element__delete_active.css);

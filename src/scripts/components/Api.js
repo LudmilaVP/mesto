@@ -39,8 +39,8 @@ export default class Api{
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            name: data.username,
-            about: data.job
+            name: data.name,
+            about: data.about
           })
         })
         .then(this._getResponse)
@@ -72,7 +72,7 @@ export default class Api{
       }
       //Постановка и снятие лайка
       addLikeCard(id) {
-        return fetch(`${this._address}/cards/likes/${id}`, {
+        return fetch(`${this._address}/cards/${id}/likes`, {
           method: 'PUT',
           headers: {
             authorization: this._token
@@ -82,7 +82,7 @@ export default class Api{
       }
      
       deleteLikeCard(id) {
-        return fetch(`${this._address}/cards/likes/${id}`, {
+        return fetch(`${this._address}/cards/${id}/likes`, {
           method: 'DELETE',
           headers: {
             authorization: this._token

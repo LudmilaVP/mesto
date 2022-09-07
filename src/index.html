@@ -42,9 +42,9 @@
                 <div class="popup__content">
                     <h2 class="popup__title">Редактировать профиль</h2>
                     <form class="popup__form popup__form_profile" name="popupForm" novalidate>
-                        <input id="username-input" type="text" name="username" placeholder="Имя" class="popup__input popup__input_type_username" minlength="2" maxlength="40" required>
+                        <input id="username-input" type="text" name="name" placeholder="Имя" class="popup__input popup__input_type_username" minlength="2" maxlength="40" required>
                         <span class="popup__input-error username-input-error"></span>
-                        <input id="text-input" type="text" name="job" placeholder="О себе" class="popup__input popup__input_type_job" minlength="2" maxlength="200" required>
+                        <input id="text-input" type="text" name="about" placeholder="О себе" class="popup__input popup__input_type_job" minlength="2" maxlength="200" required>
                         <span class="popup__input-error text-input-error"></span>
                         <button type="submit" class="popup__button">Сохранить</button>
                     </form>
@@ -58,8 +58,8 @@
                 <div class="popup__content">
                     <h2 class="popup__title">Обновить аватар</h2>
                     <form class="popup__form popup__form_avatar" name="popupForm" novalidate>
-                        <input id="url-avatar" type="url" placeholder="Ссылка на картинку" name="avatar" class="popup__input popup__input_type_avatar" required>
-                        <span class="popup__input-error url-input-error"></span>
+                        <input id="avatar-input" type="url" placeholder="Ссылка на картинку" name="avatar" class="popup__input popup__input_type_avatar" required>
+                        <span class="popup__input-error avatar-input-error"></span>
                         <button type="submit" class="popup__button">Сохранить</button>
                     </form>
                 </div>

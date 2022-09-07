@@ -44,7 +44,7 @@ export default class Card {
       }
       _renderButtons() {
         const buttonDelete = this._element.querySelector('.element__delete');
-        if (this._ownerId === this._myId)
+        if (this._ownerId == this._myId)
         buttonDelete.classList.add('element__delete_active');
         if (this._checkMyLike()) {
           this._element.querySelector('.element__like').classList.add('element__like_active');
@@ -53,13 +53,13 @@ export default class Card {
     _setEventListeners() {
       this._element.querySelector('.element__image').addEventListener("click", () =>  this._handleCardClick(this._data));
 
-      this._element.querySelector('.element__delete').addEventListener("click", () => this._handleCardDelete(this._data._myId));
+      this._element.querySelector('.element__delete').addEventListener("click", () => this._handleCardDelete(this._data._id));
 
       this._element.querySelector('.element__like').addEventListener("click", () => {
         if (this._checkMyLike()) {
-          this._handleLikeClick();
-        } else {
           this._handleLikeDelete();
+        } else {
+          this._handleLikeClick();
         }
       });
            

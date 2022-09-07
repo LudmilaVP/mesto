@@ -46,11 +46,11 @@ Promise.all([api.getUserProfile(), api.getInitialCards()])
     console.log(`Ошибка: ${err}`);
   });
 // Инициализация класса по добалению данных пользователя
-const userInfo = new UserInfo({
-    usernameSelector: '.profile__title',
-    jobSelector: '.profile__description',
-    avatarSelector: '.profile__image'
-});
+const userInfo = new UserInfo(
+    '.profile__title',
+    '.profile__description',
+    '.profile__image'
+);
 const createElement = (data) => {
         const card = new Card({
           cardSelector:'.element-template', 
@@ -164,20 +164,20 @@ popupImage.setEventListeners();
 //слушатель попапа редактирования профиля
 buttonEdit.addEventListener('click', () => {
     const getUserInfo = userInfo.getUserInfo();
-    userNameInput.value = getUserInfo.username
-    jobInput.value = getUserInfo.job
-    popupProfile.open();
+    userNameInput.value = getUserInfo.name
+    jobInput.value = getUserInfo.about
     formValidateProfile.validatePopup();
+    popupProfile.open();
 });
 
 //слушатель попапа добавления карточки
 buttonAdd.addEventListener('click', () => {
-    popupCard.open();
-    formValidateCard.validatePopup();
+  formValidateCard.validatePopup();  
+  popupCard.open();
 });
 
 // слушатель для попапа аватара
 buttonEditAvatar.addEventListener('click', () => {
-    popupAvatar.open();
-    formValidateAvatar.validatePopup();
+  formValidateAvatar.validatePopup();  
+  popupAvatar.open();
   });
