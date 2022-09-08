@@ -21,7 +21,7 @@
   "homepage": "https://github.com/LudmilaVP/mesto#readme",
   "dependencies": {
     "core-js": "^3.24.0",
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.9",
