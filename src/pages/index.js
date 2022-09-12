@@ -32,19 +32,19 @@ formValidateAvatar.enableValidation();
 const api = new Api({
     address: "https://mesto.nomoreparties.co/v1/cohort-50",
     token: "6d230dea-9c95-40e9-94e3-e33b18a30e51",
-  });
+});
 
-  // Загрузка с сервера информации о пользователе
-let userId 
+// Загрузка с сервера информации о пользователе
+let userId
 Promise.all([api.getUserProfile(), api.getInitialCards()])
-.then(([initialCards, userData]) => {
-  userId = initialCards;
-  userInfo.setUserInfo(initialCards);
-  cardList.renderItems(userData);
-  })
-  .catch((err) => {
-    console.log(`Ошибка: ${err}`);
-  });
+    .then(([initialCards, userData]) => {
+        userId = initialCards;
+        userInfo.setUserInfo(initialCards);
+        cardList.renderItems(userData);
+    })
+    .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+    });
 // Инициализация класса по добалению данных пользователя
 const userInfo = new UserInfo(
     '.profile__title',
@@ -53,37 +53,37 @@ const userInfo = new UserInfo(
 );
 const createElement = (data) => {
         const card = new Card({
-          cardSelector:'.element-template', 
-          data: data,
-          userId: userId,
-          handleCardClick: (data) => popupImage.open(data),
-          handleCardDelete: (item) => {
-            popupDeleteCard.setSubmit(() => {
-              api.deleteCard(item)
-                .then(() => {
-                  card.deleteCard();
-                  popupDeleteCard.close();
-                })
-                .catch(() => {
-                  console.log('Ошибка удаления');
+            cardSelector: '.element-template',
+            data: data,
+            userId: userId,
+            handleCardClick: (data) => popupImage.open(data),
+            handleCardDelete: (dataId) => {
+                popupDeleteCard.setSubmit(() => {
+                    api.removeCard(dataId)
+                        .then(() => {
+                            card.deleteCard();
+                            popupDeleteCard.close();
+                        })
+                        .catch(() => {
+                            console.log('Ошибка удаления');
+                        });
                 });
-            });
-            popupDeleteCard.open();
-          },
-          handleLikeClick: () => {
-            api.addLikeCard(card.getCurrentCard()._id)
-              .then((item) => {
-                card.handleLike(item);
-              })
-              .catch(() => console.log('Ошибка постановки лайка'));
-          },
-          handleLikeDelete: () => {
-            api.deleteLikeCard(card.getCurrentCard()._id)
-              .then((item) => {
-                card.handleLike(item);
-              })
-              .catch(() => console.log('Ошибка снятия лайка'));
-          },
+                popupDeleteCard.open();
+            },
+            handleLikeClick: () => {
+                api.addLikeCard(card.getCurrentCard()._id)
+                    .then((item) => {
+                        card.handleLike(item);
+                    })
+                    .catch(() => console.log('Ошибка постановки лайка'));
+            },
+            handleLikeDelete: () => {
+                api.deleteLikeCard(card.getCurrentCard()._id)
+                    .then((item) => {
+                        card.handleLike(item);
+                    })
+                    .catch(() => console.log('Ошибка снятия лайка'));
+            },
         })
         return card.createCard();
     }
@@ -91,7 +91,7 @@ const createElement = (data) => {
 const cardList = new Section({
         renderer: (item) => {
             createElement(item);
-            cardList.addItem(createElement(item));
+            cardList.addItemAppend(createElement(item));
         },
     },
     listElement
@@ -100,23 +100,23 @@ const cardList = new Section({
 // Инициализация попапа удаления карточки
 const popupDeleteCard = new PopupWithConfirmation({
     popupSelector: '.popup_delete_card',
-  });
-  popupDeleteCard.setEventListeners();
+});
+popupDeleteCard.setEventListeners();
 
 //Инициализация попапа профиля
 const popupProfile = new PopupWithForm({
     popupSelector: '.popup_type_profile',
     handleFormSubmit: (data) => {
-         popupProfile.setUserUX(true);
+        popupProfile.setUserUX(true);
 
-    api.setUserProfile(data)
-      .then((dataItem) => {
-        userInfo.setUserInfo(dataItem);
-        popupProfile.close();
-      })
-      .catch((error) => console.log(error))
-      .finally(() => popupProfile.setUserUX(false));
-  },
+        api.setUserProfile(data)
+            .then((dataItem) => {
+                userInfo.setUserInfo(dataItem);
+                popupProfile.close();
+            })
+            .catch((error) => console.log(error))
+            .finally(() => popupProfile.setUserUX(false));
+    },
 });
 popupProfile.setEventListeners();
 
@@ -126,14 +126,14 @@ const popupAvatar = new PopupWithForm({
     handleFormSubmit: (data) => {
         popupAvatar.setUserUX(true);
 
-    api.updateUserAvatar(data)
-      .then((object) => {
-        userInfo.setUserInfo(object);
-        popupAvatar.close();
-      })
-      .catch((error) => console.log(error))
-      .finally(() => popupAvatar.setUserUX(false));
-  },
+        api.updateUserAvatar(data)
+            .then((object) => {
+                userInfo.setUserInfo(object);
+                popupAvatar.close();
+            })
+            .catch((error) => console.log(error))
+            .finally(() => popupAvatar.setUserUX(false));
+    },
 });
 popupAvatar.setEventListeners();
 
@@ -142,14 +142,14 @@ const popupCard = new PopupWithForm({
     popupSelector: '.popup_add_element',
     handleFormSubmit: (item) => {
         popupCard.setUserUX(true);
-        
-    api.addNewCard(item)
-      .then((itemCard) => {
-        cardList.addItem(createElement(itemCard));
-        popupCard.close();
-      })
-      .catch((error) => console.log(error))
-      .finally(() => popupCard.setUserUX(false));
+
+        api.addNewCard(item)
+            .then((itemCard) => {
+                cardList.addItem(createElement(itemCard));
+                popupCard.close();
+            })
+            .catch((error) => console.log(error))
+            .finally(() => popupCard.setUserUX(false));
     }
 });
 
@@ -172,12 +172,12 @@ buttonEdit.addEventListener('click', () => {
 
 //слушатель попапа добавления карточки
 buttonAdd.addEventListener('click', () => {
-  formValidateCard.validatePopup();  
-  popupCard.open();
+    formValidateCard.validatePopup();
+    popupCard.open();
 });
 
 // слушатель для попапа аватара
 buttonEditAvatar.addEventListener('click', () => {
-  formValidateAvatar.validatePopup();  
-  popupAvatar.open();
-  });
+    formValidateAvatar.validatePopup();
+    popupAvatar.open();
+});
