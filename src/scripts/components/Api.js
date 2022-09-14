@@ -1,7 +1,7 @@
 export default class Api {
-    constructor({ address, token }) {
-        this._address = address;
-        this._token = token;
+    constructor(options) {
+        this._baseUrl = options.baseUrl;
+        this._headers = options.headers;
     }
 
     _getResponse(res) {
@@ -12,32 +12,25 @@ export default class Api {
         }
         //Загрузка информации о пользователе с сервера
     getUserProfile() {
-            return fetch(`${this._address}/users/me`, {
+            return fetch(`${this._baseUrl}/users/me`, {
                     method: 'GET',
-                    headers: {
-                        authorization: this._token
-                    }
+                    headers: this._headers
                 })
                 .then(this._getResponse)
         }
         //Загрузка карточек с сервера
     getInitialCards() {
-            return fetch(`${this._address}/cards`, {
+            return fetch(`${this._baseUrl}/cards`, {
                     method: 'GET',
-                    headers: {
-                        authorization: this._token
-                    }
+                    headers: this._headers
                 })
                 .then(this._getResponse)
         }
         //Редактирование профиля
     setUserProfile(data) {
-            return fetch(`${this._address}/users/me`, {
+            return fetch(`${this._baseUrl}/users/me`, {
                     method: 'PATCH',
-                    headers: {
-                        authorization: this._token,
-                        'Content-Type': 'application/json'
-                    },
+                    headers: this._headers,
                     body: JSON.stringify({
                         name: data.name,
                         about: data.about
@@ -47,12 +40,9 @@ export default class Api {
         }
         //Добавление новой карточки
     addNewCard(data) {
-            return fetch(`${this._address}/cards`, {
+            return fetch(`${this._baseUrl}/cards`, {
                     method: 'POST',
-                    headers: {
-                        authorization: this._token,
-                        'Content-Type': 'application/json'
-                    },
+                    headers: this._headers,
                     body: JSON.stringify({
                         name: data.name,
                         link: data.link
@@ -62,42 +52,33 @@ export default class Api {
         }
         //Удаление карточки
     removeCard(id) {
-            return fetch(`${this._address}/cards/${id}`, {
+            return fetch(`${this._baseUrl}/cards/${id}`, {
                     method: 'DELETE',
-                    headers: {
-                        authorization: this._token
-                    }
+                    headers: this._headers,
                 })
                 .then(this._getResponse)
         }
         //Постановка и снятие лайка
     addLikeCard(id) {
-        return fetch(`${this._address}/cards/${id}/likes`, {
+        return fetch(`${this._baseUrl}/cards/${id}/likes`, {
                 method: 'PUT',
-                headers: {
-                    authorization: this._token
-                }
+                headers: this._headers,
             })
             .then(this._getResponse)
     }
 
     deleteLikeCard(id) {
-            return fetch(`${this._address}/cards/${id}/likes`, {
+            return fetch(`${this._baseUrl}/cards/${id}/likes`, {
                     method: 'DELETE',
-                    headers: {
-                        authorization: this._token
-                    }
+                    headers: this._headers,
                 })
                 .then(this._getResponse)
         }
         //Обновление аватара пользователя
     updateUserAvatar(data) {
-        return fetch(`${this._address}/users/me/avatar`, {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
                 method: 'PATCH',
-                headers: {
-                    authorization: this._token,
-                    'Content-Type': 'application/json'
-                },
+                headers: this._headers,
                 body: JSON.stringify({
                     avatar: data.avatar,
                 })

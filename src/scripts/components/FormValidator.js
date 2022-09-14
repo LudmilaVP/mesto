@@ -62,10 +62,10 @@ export default class FormValidator {
     };
 
     // Предвалидация
-    validatePopup() {
+    resetValidation() {
         this._inputList.forEach(inputElement =>
             inputElement.classList.contains(this._inputErrorClass) &&
-            hideInputError(this._formElement, inputElement, this._formSettings));
+            this._hideInputError(this._formElement, inputElement, this._formSettings));
         this._toggleButtonState();
     };
 
