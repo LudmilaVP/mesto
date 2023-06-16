@@ -20,6 +20,9 @@
 * Функционал на JavaScript
 * Webpack
 
+## Планы по доработке:
+- Применение фреймворка React.
+
 ## Ссылки на проект и на макет:
 
 * [Проект на Github Pages](https://ludmilavp.github.io/mesto/)
