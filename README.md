@@ -1,28 +1,28 @@
-# Название проекта: Место
+# Mesto
 
-## Описание
+## Description
 
-Сайт, на котором пользователь может редактировать интерактивную форму, вводить любое имя и профессию, менять аватар, добавлять картинки на сервер, удалять, лайкать.
+A website where the user can edit an interactive form, enter any name and profession, change the avatar, add pictures to the server, delete, like.
 
-## Стек
+## Stack
 
 * HTML
 * CSS
 * Javascript
 
-## Реализация
+## Implementation
 
 * Grid Layout
-* Flexbox-вёрстка
-* Медиазапросы
-* Адаптивная верстка
-* БЭМ Nested
-* Функционал на JavaScript
+* Flexbox-layout
+* Media queries
+* Adaptive layout
+* BEM Nested
+* JavaScript functionality
 * Webpack
 
-## Планы по доработке:
-- Применение фреймворка React.
+## Improvement plans:
+- Application of the React framework.
 
-## Ссылки на проект и на макет:
+## How to open project:
 
-* [Проект на Github Pages](https://ludmilavp.github.io/mesto/)
+* [Project in Github Pages](https://ludmilavp.github.io/mesto/)
